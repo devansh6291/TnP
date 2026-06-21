@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office of Career Services | TnP Cell</title>
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --primary: #003366; /* Classic Academic Blue */
+            --secondary: #f4f7f6;
+            --accent: #d4af37; /* Subtle Gold */
+            --text-dark: #222222;
+            --text-light: #555555;
+            --white: #ffffff;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--white);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links li {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Dropdown Menus --- */
+        .dropdown-menu {
+            display: block;
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            min-width: 220px;
+            border-radius: 4px;
+            overflow: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            padding: 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding-left: 1.5rem; /* Nice subtle indent on hover */
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)),
+                        url("C:/Users/ASUS/Downloads/Shri-Govindram-Seksaria-Institute-of-Technology-and-Science--_SGSITS_-_Indore-_Madhya-Pradesh_YJkGliY7I.webp");
+            background-size: cover;
+            background-position: top center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--text-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: #c4a133;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* --- Content Sections --- */
+        .section-container {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 60vh;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .section-header .divider {
+            height: 3px;
+            width: 60px;
+            background-color: var(--accent);
+            margin: 1rem auto 0;
+        }
+
+        /* --- Grid Layouts for Cards --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--white);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 5%;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo" onclick="loadPage('home')">Training and Placement Cell</a>
+        <ul class="nav-links">
+            <li><a href="#" onclick="loadPage('home')">Home</a></li>
+            <li><a href="#" onclick="loadPage('about')">About Us</a></li>
+            
+            <!-- Recruiter Dropdown -->
+            <li class="dropdown">
+                <a href="#">For Recruiters ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="loadPage('why-recruit')">Why Recruit Here?</a></li>
+                    <li><a href="#" onclick="loadPage('demographics')">Batch Demographics '26</a></li>
+                    <li><a href="#" onclick="loadPage('procedure')">Placement Procedure</a></li>
+                    <li><a href="#" onclick="loadPage('jaf')">Job Announcement Form (JAF)</a></li>
+                </ul>
+            </li>
+
+            <!-- Student Dropdown -->
+            <li class="dropdown">
+                <a href="#">For Students ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="loadPage('policies')">AIPC Guidelines & Policies</a></li>
+                    <li><a href="#" onclick="loadPage('internships')">Internship Portal</a></li>
+                    <li><a href="#" onclick="loadPage('preparation')">Preparation & Resources</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#" onclick="loadPage('contact')">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area (Dynamic) -->
+    <main id="app-root">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Office of Career Services, Training and Placement Cell.</p>
+        <div class="footer-links">
+            <a href="#" onclick="loadPage('policies')">Privacy Policy</a>
+            <a href="#" onclick="loadPage('contact')">Reach the TnP Team</a>
+            <a href="#" onclick="loadPage('jaf')">Recruiter Portal</a>
+        </div>
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        const appRoot = document.getElementById('app-root');
+
+        // Page content definitions
+        const pages = {
+            'home': `
+                <section class="hero">
+                    <h1> Your journey to success starts here.</h1>
+                    <p>Fostering a seamless connection between global industry leaders and exceptional academic talent. Welcome to the Office of Career Services.</p>
+                    <div class="btn-group">
+                        <a onclick="loadPage('jaf')" class="btn btn-primary">Recruiter Login</a>
+                        <a onclick="loadPage('preparation')" class="btn btn-outline">Student Portal</a>
+                    </div>
+                </section>
+                <!-- ===================== PARTNERS SECTION ===================== -->
+<!-- Replace your existing "Our Prominent Partners" list block with this -->
+
+<section class="partners-section">
+  <h2 class="partners-title">Our Prominent Partners</h2>
+  <div class="partners-underline"></div>
+  <p class="partners-subtitle">We are proud to collaborate with industry leaders across the globe.</p>
+
+  <div class="partners-grid">
+
+    <div class="partner-card">
+      <img src="images/logos/google.png" alt="Google logo" class="partner-logo">
+      <span class="partner-name">Google</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/microsoft.png" alt="Microsoft logo" class="partner-logo">
+      <span class="partner-name">Microsoft</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/goldmansachs.png" alt="Goldman Sachs logo" class="partner-logo">
+      <span class="partner-name">Goldman Sachs</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/tatamotors.png" alt="Tata Motors logo" class="partner-logo">
+      <span class="partner-name">Tata Motors</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/infosys.png" alt="Infosys logo" class="partner-logo">
+      <span class="partner-name">Infosys</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/qualcomm.png" alt="Qualcomm logo" class="partner-logo">
+      <span class="partner-name">Qualcomm</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/accenture.png" alt="Accenture logo" class="partner-logo">
+      <span class="partner-name">Accenture</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/deutschebank.png" alt="Deutsche Bank logo" class="partner-logo">
+      <span class="partner-name">Deutsche Bank</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/mastercard.png" alt="Mastercard logo" class="partner-logo">
+      <span class="partner-name">Mastercard</span>
+    </div>
+
+    <div class="partner-card">
+      <img src="images/logos/deloitte.png" alt="Deloitte logo" class="partner-logo">
+      <span class="partner-name">Deloitte</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== STYLES ===================== -->
+<!-- Put this in your <style> tag or a linked .css file -->
+
+<style>
+.partners-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.partners-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #16306b; /* matches your dark navy heading color */
+  margin-bottom: 14px;
+}
+
+.partners-underline {
+  width: 70px;
+  height: 4px;
+  background: #d4a72c; /* matches your gold accent line */
+  margin: 0 auto 24px;
+  border-radius: 2px;
+}
+
+.partners-subtitle {
+  font-size: 1.15rem;
+  color: #333;
+  margin-bottom: 45px;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.partner-card {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(22, 48, 107, 0.15);
+  border-color: #d4a72c;
+}
+
+.partner-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.partner-card:hover .partner-logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.partner-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #16306b;
+  text-align: center;
+}
+
+/* Responsive tweak for small screens */
+@media (max-width: 480px) {
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Quick Access</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="grid">
+                        <div class="card" onclick="loadPage('why-recruit')">
+                            <h3>Academic Brilliance</h3>
+                            <p>Explore our academic programs. From core engineering to microservices backend development and analytical chemistry methodologies.</p>
+                        </div>
+                        <div class="card" onclick="loadPage('procedure')">
+                            <h3>Placement Timeline</h3>
+                            <p>View our phased placement schedules, pre-placement talk (PPT) slots, and interview coordination procedures.</p>
+                        </div>
+                        <div class="card" onclick="loadPage('demographics')">
+                            <h3>Placement Brochure '26</h3>
+                            <p>Download the latest brochure detailing batch strengths, past recruiter statistics, and institutional milestones.</p>
+                        </div>
+                    </div>
+                </section>
+            `,
+            'about': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>About the Cell</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-light); font-size: 1.1rem;">
+                        The Training and Placement Cell acts as the primary nodal point for career-related activities. We manage industry interactions, soft-skills training, corporate seminars, and the end-to-end orchestration of the recruitment process.
+                    </p>
+                </section>
+            `,
+            'why-recruit': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Why Recruit Here?</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="grid">
+                        <div class="card">
+                            <h3>Rigorous Curriculum</h3>
+                            <p>Our academic programs continuously evolve to match industry standards, spanning deep-tech software architecture, core hardware engineering, and advanced chemical/toxicology research.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Innovation & Hackathons</h3>
+                            <p>Our student body actively participates in and secures top podiums at national-level hackathons, open-source programs, and foundational research fellowships.</p>
+                        </div>
+                    </div>
+                </section>
+            `,
+            'demographics': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Batch Demographics</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div style="background: white; padding: 3rem; border-radius: 8px; text-align: center; border: 1px solid #eee;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Class of 2026 Profile</h3>
+                        <p style="color: var(--text-light);">[ Interactive charts and PDF viewer for the Placement Brochure will be integrated here. ]</p>
+                    </div>
+                </section>
+            `,
+            'procedure': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Placement Procedure</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <ol style="max-width: 600px; margin: 0 auto; padding-left: 20px; color: var(--text-light); line-height: 2;">
+                        <li><strong>Invitations:</strong> Sent to corporate partners starting July.</li>
+                        <li><strong>JAF Submission:</strong> Companies fill the Job Announcement Form.</li>
+                        <li><strong>Pre-Placement Talks (PPTs):</strong> Conducted online/offline in September - October.</li>
+                        <li><strong>Shortlisting:</strong> Resumes and coding/aptitude tests run through November.</li>
+                        <li><strong>Interviews (Phase I):</strong> Commences first week of December.</li>
+                    </ol>
+                </section>
+            `,
+            'jaf': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Job Announcement Form</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <form onsubmit="event.preventDefault(); alert('JAF Submitted Successfully!');">
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Company Name</label>
+                                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;" placeholder="e.g. Acme Corp">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Role Offered</label>
+                                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;" placeholder="e.g. SDE, Research Analyst">
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; border: none;">Submit Registration</button>
+                        </form>
+                    </div>
+                </section>
+            `,
+            'preparation': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Student Preparation Portal</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="grid">
+                        <div class="card">
+                            <h3>Algorithm & DSA Sheets</h3>
+                            <p>Curated problem sets, LeetCode-style assessments, and standard DSA cheat sheets to prep for coding rounds.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Core Subjects</h3>
+                            <p>Interview prep modules for core engineering concepts, method development, system design, and database management.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Past Experiences</h3>
+                            <p>Read through archived interview transcripts and selection pipelines from seniors who secured top offers.</p>
+                        </div>
+                    </div>
+                </section>
+            `,
+            'internships': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Internship Opportunities</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-light);">
+                        The portal for Summer and Winter internship applications is currently open for pre-final year students. Please ensure your resumes are verified by your faculty advisor.
+                    </p>
+                </section>
+            `,
+            'policies': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Policies & Guidelines</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-light);">
+                        We strictly adhere to the All India Placement Committee (AIPC) guidelines. <br><br>
+                        <strong>"One Student, One Offer"</strong> policy applies once a student secures a placement above the baseline compensation threshold.
+                    </p>
+                </section>
+            `,
+            'contact': `
+                <section class="section-container">
+                    <div class="section-header">
+                        <h2>Contact Us</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div style="text-align: center; color: var(--text-light); font-size: 1.1rem; line-height: 2;">
+                        <p><strong>Office of Career Services</strong></p>
+                        <p>Training and Placement Cell</p>
+                        <p>Email: placement@college.edu</p>
+                        <p>Phone: +91-00000-00000</p>
+                    </div>
+                </section>
+            `
+        };
+
+        // Routing function
+        function loadPage(pageId) {
+            // Update the DOM
+            if(pages[pageId]) {
+                appRoot.innerHTML = pages[pageId];
+            } else {
+                appRoot.innerHTML = '<section class="section-container"><h2 style="text-align:center;">404 - Page Not Found</h2></section>';
+            }
+            
+            // Smoothly scroll back to the top of the page on route change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize default view
+        loadPage('home');
+    </script>
+
+</body>
+</html>
